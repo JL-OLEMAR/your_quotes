@@ -32,8 +32,7 @@ export function CreatePost() {
       try {
         const newPost = await addPost({ title, body, userId: Number(userId) })
 
-        posts.unshift(newPost)
-        setPosts(posts)
+        setPosts([{ ...newPost, id: posts.length + 1 }, ...posts])
         history.push('/')
       } catch (error) {
         console.error(error)
