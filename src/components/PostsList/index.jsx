@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { QuotesContext } from '../../Context/QuotesContext.jsx'
+import { QuotesContext } from '../../Context'
 import { PostItem } from '../PostItem'
 import { Title } from '../../shared'
 

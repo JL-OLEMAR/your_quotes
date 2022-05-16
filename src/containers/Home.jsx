@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 
+import { QuotesContext } from '../Context'
 import { useForm } from '../hooks'
 import { PostsList } from '../components'
 import { ButtonsContainer, Container, MainButton, Form } from '../shared'
-import { QuotesContext } from '../Context/QuotesContext.jsx'
 
 export function Home() {
   const { posts, users } = useContext(QuotesContext)

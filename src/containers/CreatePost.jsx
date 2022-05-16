@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import { QuotesContext } from '../Context/QuotesContext.jsx'
-import { useForm } from '../hooks'
+import { QuotesContext } from '../Context'
 import { addPost } from '../services'
+import { useForm } from '../hooks'
 import {
   Button,
   CancelButton,
@@ -20,20 +20,19 @@ const INITIAL_STATE = {
 }
 
 export function CreatePost() {
-  const [formValues, handleInputChange] = useForm(INITIAL_STATE)
+  const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
   const { posts, setPosts, users } = useContext(QuotesContext)
-  const { title, body, userId } = formValues
   const history = useHistory()
 
-  const canSubmit = [title, body, userId].every(Boolean)
+  const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (canSubmit) {
       try {
-        const newPosts = await addPost({ title, body, userId: Number(userId) })
+        const newPost = await addPost({ title, body, userId: Number(userId) })
 
-        posts.unshift(newPosts)
+        posts.unshift(newPost)
         setPosts(posts)
         history.push('/')
       } catch (error) {
@@ -92,12 +91,12 @@ export function CreatePost() {
           </label>
 
           <div>
-            <Button disabled={!canSubmit} type='submit'>
-              Create Post ✅
-            </Button>
             <CancelButton as={Link} to='/'>
               Cancel 🚫
             </CancelButton>
+            <Button disabled={!canSubmit} type='submit'>
+              Create Post ✅
+            </Button>
           </div>
         </Form>
       </Container>

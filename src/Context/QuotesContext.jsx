@@ -2,8 +2,10 @@ import { createContext, useEffect, useState } from 'react'
 
 import { getPosts, getUsers } from '../services'
 
+// Context
 export const QuotesContext = createContext({})
 
+// Provider Component
 export const QuotesProvider = ({ children }) => {
   const [posts, setPosts] = useState([])
   const [users, setUsers] = useState([])
@@ -17,7 +19,7 @@ export const QuotesProvider = ({ children }) => {
   }, [setUsers])
 
   return (
-    <QuotesContext.Provider value={{ posts, users, setPosts, setUsers }}>
+    <QuotesContext.Provider value={{ posts, setPosts, users }}>
       {children}
     </QuotesContext.Provider>
   )
