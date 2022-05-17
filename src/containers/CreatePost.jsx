@@ -90,7 +90,7 @@ export function CreatePost() {
           </label>
 
           <div>
-            <CancelButton as={Link} to='/'>
+            <CancelButton as={Link} to='/' type='button'>
               Cancel 🚫
             </CancelButton>
             <Button disabled={!canSubmit} type='submit'>
