@@ -8,8 +8,10 @@ export const FooterContainer = styled.footer`
 
   a {
     color: ${({ theme }) => theme.colors.white};
+  }
 
-    &:hover {
+  @media (hover: hover) {
+    a:hover {
       text-decoration: underline;
     }
   }
