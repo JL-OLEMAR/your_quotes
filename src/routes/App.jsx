@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import { QuotesProvider } from '../Context'
-import { CreatePost, Home, SinglePost } from '../containers'
+import { CreatePost, EditPost, Home, SinglePost } from '../containers'
 import { Layout } from '../components'
-import { GlobalStyle, theme } from '../shared'
 import { ScrollToTop } from '../utils/ScrollToTop.js'
+import { GlobalStyle, theme } from '../shared'
 
 export function App() {
   return (
@@ -19,6 +19,7 @@ export function App() {
               <Route exact component={Home} path='/' />
               <Route exact component={CreatePost} path='/create' />
               <Route exact component={SinglePost} path='/posts/:postId' />
+              <Route exact component={EditPost} path='/edit/:postId' />
             </Switch>
           </Layout>
         </QuotesProvider>
