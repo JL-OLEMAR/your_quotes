@@ -1,1 +1,1 @@
-export { QuotesContext, QuotesProvider } from './QuotesContext.jsx'
+export { PostsContext, PostsProvider } from './PostsContext.jsx'

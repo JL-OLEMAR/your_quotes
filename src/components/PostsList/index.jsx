@@ -1,13 +1,13 @@
 import { useContext } from 'react'
 
-import { QuotesContext } from '../../Context'
+import { PostsContext } from '../../Context'
 import { PostItem } from '../PostItem'
 import { Title } from '../../shared'
 
 import { Posts } from './PostsList.styles'
 
 export function PostsList({ userPosts }) {
-  const { posts } = useContext(QuotesContext)
+  const { posts } = useContext(PostsContext)
   const render = userPosts && userPosts.length > 0 ? userPosts : posts
 
   return (

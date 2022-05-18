@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import { QuotesProvider } from '../Context'
+import { PostsProvider } from '../Context'
 import { CreatePost, EditPost, Home, SinglePost } from '../containers'
 import { Layout } from '../components'
 import { ScrollToTop } from '../utils/ScrollToTop.js'
@@ -13,7 +13,7 @@ export function App() {
       <BrowserRouter>
         <GlobalStyle />
         <ScrollToTop />
-        <QuotesProvider>
+        <PostsProvider>
           <Layout>
             <Switch>
               <Route exact component={Home} path='/' />
@@ -22,7 +22,7 @@ export function App() {
               <Route exact component={EditPost} path='/edit/:postId' />
             </Switch>
           </Layout>
-        </QuotesProvider>
+        </PostsProvider>
       </BrowserRouter>
     </ThemeProvider>
   )

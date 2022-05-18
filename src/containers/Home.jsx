@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { QuotesContext } from '../Context'
+import { PostsContext } from '../Context'
 import { useForm } from '../hooks'
 import { PostsList } from '../components'
 import { ButtonsContainer, Container, MainButton, Form } from '../shared'
 
 export function Home() {
-  const { posts, users } = useContext(QuotesContext)
+  const { posts, users } = useContext(PostsContext)
   const [{ userId }, handleInputChange] = useForm({ userId: '' })
   const userPosts = posts.filter((post) => post.userId === Number(userId))
 

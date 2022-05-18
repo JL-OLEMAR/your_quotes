@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { QuotesContext } from '../../Context'
+import { PostsContext } from '../../Context'
 import { DeleteModal, PostAuthor } from '../../components'
 import {
   ButtonsContainer,
@@ -15,7 +15,7 @@ import { Post } from './SinglePost.styles.js'
 
 export function SinglePost() {
   const [modal, setModal] = useState(false)
-  const { posts, setPosts } = useContext(QuotesContext)
+  const { posts, setPosts } = useContext(PostsContext)
   const { postId } = useParams()
 
   const { id, title, body, userId } = posts.find(

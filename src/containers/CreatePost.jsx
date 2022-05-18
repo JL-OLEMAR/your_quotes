@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import { QuotesContext } from '../Context'
+import { PostsContext } from '../Context'
 import { addPost } from '../services'
 import { useForm } from '../hooks'
 import {
@@ -21,7 +21,7 @@ const INITIAL_STATE = {
 
 export function CreatePost() {
   const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
-  const { posts, setPosts, users } = useContext(QuotesContext)
+  const { posts, setPosts, users } = useContext(PostsContext)
   const history = useHistory()
 
   const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
@@ -77,12 +77,12 @@ export function CreatePost() {
           </label>
 
           <label htmlFor='body'>
-            <FieldTitle>Quote:</FieldTitle>
+            <FieldTitle>Post:</FieldTitle>
             <textarea
               required
               id='body'
               name='body'
-              placeholder='Quote...'
+              placeholder='Type your post here...'
               type='text'
               value={body}
               onChange={handleInputChange}
