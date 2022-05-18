@@ -6,21 +6,23 @@ export const ButtonsContainer = styled.div`
 
   @media screen and (min-width: 1024px) {
     grid-template-columns: repeat(2, 250px);
+    justify-content: center;
+    gap: 20px;
   }
 `
 
 export const Button = styled.button`
   width: 100%;
   height: 50px;
-  font-weight: 700;
   border: 0;
-  outline: 0;
   border-radius: 5px;
-  cursor: pointer;
+  outline: 0;
   font-family: ${({ theme }) => theme.font.primary};
   font-size: ${({ theme }) => theme.sizes.n};
-  color: ${({ theme }) => theme.colors.black};
+  font-weight: 700;
   background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.black};
+  cursor: pointer;
 
   &:disabled {
     background: #333;

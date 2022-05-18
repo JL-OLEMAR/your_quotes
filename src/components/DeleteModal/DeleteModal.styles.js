@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 export const ModalContainer = styled.div`
-  display: ${({ isShowing }) => (isShowing ? 'grid' : 'none')};
-  place-items: center;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  display: ${({ isShowing }) => (isShowing ? 'grid' : 'none')};
+  place-items: center;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px);
 `

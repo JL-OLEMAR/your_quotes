@@ -2,18 +2,18 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Post = styled.article`
-  display: grid;
-  padding: 20px;
-  grid-template-rows: repeat(2, auto) 1fr;
   position: relative;
-  border-radius: 10px;
+  display: grid;
+  grid-template-rows: repeat(2, auto) 1fr;
+  padding: 20px;
   border: 2px solid ${({ theme }) => theme.colors.primary};
+  border-radius: 10px;
 
   h3 {
     margin-top: 0;
     text-align: center;
-    font-weight: 500;
     font-size: ${({ theme }) => theme.sizes.m};
+    font-weight: 500;
     color: ${({ theme }) => theme.colors.white};
   }
 
@@ -32,11 +32,11 @@ export const PostTitle = styled(Link)`
 
   &::before {
     content: '';
-    display: block;
     position: absolute;
     top: 0;
     right: 0;
-    left: 0;
     bottom: 0;
+    left: 0;
+    display: block;
   }
 `
