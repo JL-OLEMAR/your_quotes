@@ -5,7 +5,11 @@ export function Footer() {
     <FooterContainer>
       <span>
         Made with &hearts; by{' '}
-        <a href='#' rel='noreferrer' target='_blank'>
+        <a
+          href='https://github.com/JL-OLEMAR/'
+          rel='noreferrer'
+          target='_blank'
+        >
           JL-OLEMAR
         </a>
       </span>
