@@ -1,13 +1,18 @@
-export const updatePost = async (idPost, post) => {
-  const response = await window.fetch(
-    `https://jsonplaceholder.typicode.com/posts/${idPost}`,
-    {
+import { API_URL } from './settings.js'
+
+const fromApriRespToUpdatePost = (apiResponse) => {
+  const { id, title, body, userId } = apiResponse
+
+  return { id, title, body, userId }
+}
+
+export function updatePost(idPost, post) {
+  return window
+    .fetch(`${API_URL}/posts/${idPost}`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(post)
-    }
-  )
-  const data = await response.json()
-
-  return data
+    })
+    .then((response) => response.json())
+    .then(fromApriRespToUpdatePost)
 }

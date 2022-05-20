@@ -1,5 +1,7 @@
 export { addPost } from './addPost.js'
 export { deletePost } from './deletePost.js'
+export { getPostById } from './getPostById.js'
 export { getPosts } from './getPosts.js'
+export { getUserById } from './getUserById.js'
 export { getUsers } from './getUsers.js'
 export { updatePost } from './updatePost.js'
