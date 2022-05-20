@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { PostsContext } from '../../Context'
-import { DeleteModal, PostAuthor } from '../../components'
+import { DeleteModal, Loading, PostAuthor } from '../../components'
 import {
   ButtonsContainer,
   Container,
@@ -15,12 +15,10 @@ import { Post } from './SinglePost.styles.js'
 
 export function SinglePost() {
   const [modal, setModal] = useState(false)
-  const { posts, setPosts } = useContext(PostsContext)
   const { postId } = useParams()
-
-  const { id, title, body, userId } = posts.find(
-    ({ id }) => id.toString() === postId
-  )
+  const { setPosts, getPostById, getPostsFilterByPostId, isLoading } =
+    useContext(PostsContext)
+  const { id, title, body, userId } = getPostById(postId)
 
   const handleDeletePost = async () => {
     setModal(!modal)
@@ -40,18 +38,22 @@ export function SinglePost() {
             </DeleteButton>
           </ButtonsContainer>
 
-          <Post>
-            <Title>{title}</Title>
-            <PostAuthor userId={userId} />
-            <p>{body}</p>
-          </Post>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Post>
+              <Title>{title}</Title>
+              <PostAuthor userId={userId} />
+              <p>{body}</p>
+            </Post>
+          )}
         </section>
       </Container>
 
       <DeleteModal
+        getPostsFilterByPostId={getPostsFilterByPostId}
         modal={modal}
-        postIdFiltered={id}
-        posts={posts}
+        postId={id}
         setModal={setModal}
         setPosts={setPosts}
       />

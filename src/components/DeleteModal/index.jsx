@@ -6,21 +6,20 @@ import { DeleteButton, CancelButton } from '../../shared'
 import { ModalContainer, Modal } from './DeleteModal.styles.js'
 
 export function DeleteModal({
+  getPostsFilterByPostId,
   modal,
+  postId,
   setModal,
-  postIdFiltered,
-  posts,
   setPosts
 }) {
   const history = useHistory()
 
   const handleConfirmDelete = async () => {
     try {
-      await deletePost(postIdFiltered)
-      const removedPost = posts.filter(({ id }) => id !== postIdFiltered)
+      await deletePost(postId)
+      const postsFiltered = getPostsFilterByPostId(postId)
 
-      setPosts([...removedPost])
-
+      setPosts([...postsFiltered])
       history.push('/')
     } catch (error) {
       console.log(error)

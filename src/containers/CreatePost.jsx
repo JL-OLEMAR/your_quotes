@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import { PostsContext } from '../Context'
 import { addPost } from '../services'
+import { PostsContext } from '../Context'
 import { useForm } from '../hooks'
 import {
   Button,
@@ -21,9 +21,8 @@ const INITIAL_STATE = {
 
 export function CreatePost() {
   const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
-  const { posts, setPosts, users } = useContext(PostsContext)
+  const { users, posts, setPosts } = useContext(PostsContext)
   const history = useHistory()
-
   const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
 
   const handleSubmit = async (e) => {

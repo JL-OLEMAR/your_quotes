@@ -15,13 +15,14 @@ import {
 
 export function EditPost() {
   const { postId } = useParams()
+  const { setPosts, getPostById, getPostsFilterByPostId } =
+    useContext(PostsContext)
+  const post = getPostById(postId)
   const history = useHistory()
-  const { posts, setPosts } = useContext(PostsContext)
-  const postFilter = posts.find(({ id }) => id === Number(postId))
 
   const [{ title, body }, handleInputChange] = useForm({
-    title: postFilter.title,
-    body: postFilter.body
+    title: post.title,
+    body: post.body
   })
 
   const canSubmit = [title, body].every(Boolean) // if trusty, ok to submit
@@ -31,15 +32,14 @@ export function EditPost() {
 
     if (canSubmit) {
       try {
-        const editedPost = await updatePost(postFilter.id, {
-          ...postFilter,
+        const editedPost = await updatePost(postId, {
+          ...post,
           title,
           body
         })
+        const postsFiltered = getPostsFilterByPostId(post.id)
 
-        const postsWithoutEdit = posts.filter(({ id }) => id !== postFilter.id)
-
-        setPosts([editedPost, ...postsWithoutEdit])
+        setPosts([editedPost, ...postsFiltered])
         history.push(`/posts/${postId}`)
       } catch (err) {
         console.error('Failed to edit the post: ', err)
