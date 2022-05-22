@@ -49,6 +49,7 @@
         "reservedFirst": true
       }
     ],
+    "import/no-duplicates": "error",
     "import/order": [
       "warn",
       {
