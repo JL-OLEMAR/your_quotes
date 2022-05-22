@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { createContext } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 import { getPosts, getUsers } from '../services'
 
 // Context
-export const PostsContext = createContext({})
+export const PostsContext = createContext([])
 
 // Provider Component
 export const PostsProvider = ({ children }) => {

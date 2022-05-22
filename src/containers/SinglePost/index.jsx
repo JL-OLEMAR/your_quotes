@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { PostsContext } from '../../Context'
-import { DeleteModal, Loading, PostAuthor } from '../../components'
+import { DeleteModal, PostAuthor } from '../../components'
 import {
   ButtonsContainer,
   Container,
@@ -16,7 +16,7 @@ import { Post } from './SinglePost.styles.js'
 export function SinglePost() {
   const [modal, setModal] = useState(false)
   const { postId } = useParams()
-  const { setPosts, getPostById, getPostsFilterByPostId, isLoading } =
+  const { setPosts, getPostById, getPostsFilterByPostId } =
     useContext(PostsContext)
   const { id, title, body, userId } = getPostById(postId)
 
@@ -38,15 +38,11 @@ export function SinglePost() {
             </DeleteButton>
           </ButtonsContainer>
 
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <Post>
-              <Title>{title}</Title>
-              <PostAuthor userId={userId} />
-              <p>{body}</p>
-            </Post>
-          )}
+          <Post>
+            <Title>{title}</Title>
+            <PostAuthor userId={userId} />
+            <p>{body}</p>
+          </Post>
         </section>
       </Container>
 

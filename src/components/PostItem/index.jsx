@@ -1,6 +1,6 @@
 import { PostAuthor } from '../PostAuthor'
 
-import { Post, PostTitle } from './PostItem.styles'
+import { Post, PostTitle } from './PostItem.styles.js'
 
 export function PostItem({ body, id, title, userId }) {
   return (
