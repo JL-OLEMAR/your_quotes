@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { deletePost } from '../../services'
 import { DeleteButton, CancelButton } from '../../shared'
@@ -13,7 +13,7 @@ export function DeleteModal({
   setModal,
   setPosts
 }) {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleConfirmDelete = async () => {
     try {
@@ -22,7 +22,7 @@ export function DeleteModal({
 
       setPosts([...postsFiltered])
       setSuccessToast('Post deleted successfully')
-      history.push('/')
+      navigate('/')
     } catch (error) {
       setErrorToast('Failed to delete the post')
       console.error('Failed to delete the post: ', error)

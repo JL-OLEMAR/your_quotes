@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 
@@ -18,12 +18,13 @@ export function App() {
           <ScrollToTop />
           <PostsProvider>
             <Layout>
-              <Switch>
-                <Route exact component={Home} path='/' />
-                <Route exact component={CreatePost} path='/create' />
-                <Route exact component={SinglePost} path='/posts/:postId' />
-                <Route exact component={EditPost} path='/edit/:postId' />
-              </Switch>
+              <Routes>
+                <Route element={<Home />} path='/' />
+                <Route element={<CreatePost />} path='/create' />
+                <Route element={<SinglePost />} path='/posts/:postId' />
+                <Route element={<EditPost />} path='/edit/:postId' />
+                <Route element={<Navigate to='/' />} path='*' />
+              </Routes>
             </Layout>
           </PostsProvider>
         </BrowserRouter>

@@ -1,4 +1,4 @@
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useContext } from 'react'
 
 import { updatePost } from '../services'
@@ -19,7 +19,7 @@ export function EditPost() {
   const { setPosts, getPostById, getPostsFilterByPostId } =
     useContext(PostsContext)
   const post = getPostById(postId)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [{ title, body }, handleInputChange] = useForm({
     title: post.title,
@@ -42,7 +42,7 @@ export function EditPost() {
 
         setPosts([editedPost, ...postsFiltered])
         setSuccessToast('Post updated successfully')
-        history.push(`/posts/${postId}`)
+        navigate(`/posts/${postId}`)
       } catch (err) {
         setErrorToast('Failed to edit the post')
         console.error('Failed to edit the post: ', err)

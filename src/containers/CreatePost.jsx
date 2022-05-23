@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { addPost } from '../services'
 import { PostsContext } from '../Context'
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 export function CreatePost() {
   const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
   const { users, posts, setPosts } = useContext(PostsContext)
-  const history = useHistory()
+  const navigate = useNavigate()
   const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
 
   const handleSubmit = async (e) => {
@@ -34,7 +34,7 @@ export function CreatePost() {
 
         setPosts([{ ...newPost, id: posts.length + 1 }, ...posts])
         setSuccessToast('Post created successfully')
-        history.push('/')
+        navigate('/')
       } catch (error) {
         setErrorToast('Error creating post')
         console.error('Error creating post: ', error)
