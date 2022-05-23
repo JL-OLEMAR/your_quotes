@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { PostsContext } from '../Context'
 import { useForm } from '../hooks'
-import { Loading, PostsList } from '../components'
+import { PostsList } from '../components'
 import { ButtonsContainer, Container, MainButton, Form } from '../shared'
 
 export function Home() {
@@ -36,7 +36,7 @@ export function Home() {
         </Form>
       </ButtonsContainer>
 
-      {isLoading ? <Loading /> : <PostsList userPosts={userPosts} />}
+      <PostsList isLoading={isLoading} userPosts={userPosts} />
     </Container>
   )
 }

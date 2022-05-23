@@ -1,9 +1,12 @@
 import { PostItem } from '../PostItem'
+import { Loading } from '../Loading'
 import { Title } from '../../shared'
 
 import { Posts } from './PostsList.styles.js'
 
-export function PostsList({ userPosts }) {
+export function PostsList({ userPosts, isLoading }) {
+  if (isLoading) return <Loading />
+
   return (
     <Posts>
       <Title>Posts 📃</Title>
