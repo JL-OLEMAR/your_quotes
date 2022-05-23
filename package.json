@@ -12,6 +12,7 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-router-dom": "5.3.1",
+    "react-toastify": "9.0.1",
     "styled-components": "5.3.5"
   },
   "devDependencies": {
@@ -37,7 +38,7 @@
       "prettier --write",
       "eslint --quiet --fix ."
     ],
-    "*.{css}": [
+    "*.css": [
       "prettier --write"
     ]
   }

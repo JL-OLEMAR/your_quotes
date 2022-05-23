@@ -12,6 +12,7 @@ import {
   Form,
   Title
 } from '../shared'
+import { setErrorToast, setSuccessToast } from '../utils'
 
 const INITIAL_STATE = {
   title: '',
@@ -32,9 +33,11 @@ export function CreatePost() {
         const newPost = await addPost({ title, body, userId: Number(userId) })
 
         setPosts([{ ...newPost, id: posts.length + 1 }, ...posts])
+        setSuccessToast('Post created successfully')
         history.push('/')
       } catch (error) {
-        console.error(error)
+        setErrorToast('Error creating post')
+        console.error('Error creating post: ', error)
       }
     }
   }

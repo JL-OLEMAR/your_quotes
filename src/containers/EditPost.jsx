@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { updatePost } from '../services'
 import { PostsContext } from '../Context'
 import { useForm } from '../hooks'
+import { setErrorToast, setSuccessToast } from '../utils'
 import {
   Button,
   CancelButton,
@@ -40,8 +41,10 @@ export function EditPost() {
         const postsFiltered = getPostsFilterByPostId(post.id)
 
         setPosts([editedPost, ...postsFiltered])
+        setSuccessToast('Post updated successfully')
         history.push(`/posts/${postId}`)
       } catch (err) {
+        setErrorToast('Failed to edit the post')
         console.error('Failed to edit the post: ', err)
       }
     }

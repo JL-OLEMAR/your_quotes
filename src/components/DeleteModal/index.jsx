@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom'
 
 import { deletePost } from '../../services'
 import { DeleteButton, CancelButton } from '../../shared'
+import { setErrorToast, setSuccessToast } from '../../utils'
 
 import { ModalContainer, Modal } from './DeleteModal.styles.js'
 
@@ -20,9 +21,11 @@ export function DeleteModal({
       const postsFiltered = getPostsFilterByPostId(postId)
 
       setPosts([...postsFiltered])
+      setSuccessToast('Post deleted successfully')
       history.push('/')
     } catch (error) {
-      console.log(error)
+      setErrorToast('Failed to delete the post')
+      console.error('Failed to delete the post: ', error)
     }
   }
 
