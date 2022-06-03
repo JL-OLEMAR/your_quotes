@@ -8,7 +8,8 @@ import { ButtonsContainer, Container, MainButton, Form } from '../shared'
 
 export function Home() {
   const [{ userId }, handleInputChange] = useForm({ userId: '' })
-  const { users, isLoading, getPostsFilterByUserId } = useContext(PostsContext)
+  const { users, isLoadingPosts, getPostsFilterByUserId } =
+    useContext(PostsContext)
   const userPosts = getPostsFilterByUserId(userId)
 
   return (
@@ -36,7 +37,7 @@ export function Home() {
         </Form>
       </ButtonsContainer>
 
-      <PostsList isLoading={isLoading} userPosts={userPosts} />
+      <PostsList isLoadingPosts={isLoadingPosts} userPosts={userPosts} />
     </Container>
   )
 }

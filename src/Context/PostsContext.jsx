@@ -9,18 +9,18 @@ export const PostsContext = createContext([])
 export const PostsProvider = ({ children }) => {
   const [users, setUsers] = useState([])
   const [posts, setPosts] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false)
 
   useEffect(() => {
     getUsers().then(setUsers)
   }, [])
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoadingPosts(true)
 
     getPosts().then((post) => {
       setPosts(post)
-      setIsLoading(false)
+      setIsLoadingPosts(false)
     })
   }, [])
 
@@ -51,7 +51,7 @@ export const PostsProvider = ({ children }) => {
       value={{
         users,
         posts,
-        isLoading,
+        isLoadingPosts,
         setPosts,
         getUserById,
         getPostById,
