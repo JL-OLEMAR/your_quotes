@@ -18,9 +18,10 @@ export function DeleteModal({
   const handleConfirmDelete = async () => {
     try {
       await deletePost(postId)
-      const postsFiltered = getPostsFilterByPostId(postId)
+      const [...restPosts] = getPostsFilterByPostId(postId)
 
-      setPosts([...postsFiltered])
+      setPosts(restPosts)
+      window.localStorage.setItem('posts', JSON.stringify(restPosts))
       setSuccessToast('Post deleted successfully')
       navigate('/')
     } catch (error) {

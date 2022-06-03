@@ -39,8 +39,10 @@ export function EditPost() {
           body
         })
         const postsFiltered = getPostsFilterByPostId(post.id)
+        const restPosts = [editedPost, ...postsFiltered]
 
-        setPosts([editedPost, ...postsFiltered])
+        setPosts(restPosts)
+        window.localStorage.setItem('posts', JSON.stringify(restPosts))
         setSuccessToast('Post updated successfully')
         navigate(`/posts/${postId}`)
       } catch (err) {

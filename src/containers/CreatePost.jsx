@@ -30,9 +30,11 @@ export function CreatePost() {
     e.preventDefault()
     if (canSubmit) {
       try {
-        const newPost = await addPost({ title, body, userId: Number(userId) })
+        const newPosted = await addPost({ title, body, userId: Number(userId) })
+        const restPosts = [{ ...newPosted, id: posts.length + 1 }, ...posts]
 
-        setPosts([{ ...newPost, id: posts.length + 1 }, ...posts])
+        setPosts(restPosts)
+        window.localStorage.setItem('posts', JSON.stringify(restPosts))
         setSuccessToast('Post created successfully')
         navigate('/')
       } catch (error) {

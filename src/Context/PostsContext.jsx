@@ -7,22 +7,38 @@ export const PostsContext = createContext([])
 
 // Provider Component
 export const PostsProvider = ({ children }) => {
-  const [users, setUsers] = useState([])
-  const [posts, setPosts] = useState([])
+  const [users, setUsers] = useState(
+    () => JSON.parse(window.localStorage.getItem('users')) || []
+  )
+  const [posts, setPosts] = useState(
+    () => JSON.parse(window.localStorage.getItem('posts')) || []
+  )
   const [isLoadingPosts, setIsLoadingPosts] = useState(false)
 
   useEffect(() => {
-    getUsers().then(setUsers)
-  }, [])
+    if (users.length === 0) {
+      getUsers().then((user) => {
+        setUsers(user)
+        window.localStorage.setItem('users', JSON.stringify(user))
+      })
+    } else {
+      setUsers(users)
+    }
+  }, [users])
 
   useEffect(() => {
-    setIsLoadingPosts(true)
+    if (posts.length === 0) {
+      setIsLoadingPosts(true)
 
-    getPosts().then((post) => {
-      setPosts(post)
-      setIsLoadingPosts(false)
-    })
-  }, [])
+      getPosts().then((post) => {
+        setPosts(post)
+        setIsLoadingPosts(false)
+        window.localStorage.setItem('posts', JSON.stringify(post))
+      })
+    } else {
+      setPosts(posts)
+    }
+  }, [posts])
 
   // Get a user where user.id === userId return { user }
   const getUserById = (userId) => {
@@ -52,6 +68,7 @@ export const PostsProvider = ({ children }) => {
         users,
         posts,
         isLoadingPosts,
+        setUsers,
         setPosts,
         getUserById,
         getPostById,
