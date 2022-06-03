@@ -1,6 +1,6 @@
 import { API_URL } from './settings.js'
 
-const fromApriRespToUpdatePost = (apiResponse) => {
+const fromApiRespToUpdatePost = (apiResponse) => {
   const { id, title, body, userId } = apiResponse
 
   return { id, title, body, userId }
@@ -14,5 +14,5 @@ export function updatePost(idPost, post) {
       body: JSON.stringify(post)
     })
     .then((response) => response.json())
-    .then(fromApriRespToUpdatePost)
+    .then(fromApiRespToUpdatePost)
 }
