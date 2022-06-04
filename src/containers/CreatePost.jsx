@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { addPost } from '../services'
 import { PostsContext } from '../Context'
 import { useForm } from '../hooks'
+import { UsersList } from '../components'
 import {
   Button,
   CancelButton,
@@ -22,7 +23,7 @@ const INITIAL_STATE = {
 
 export function CreatePost() {
   const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
-  const { users, posts, setPosts } = useContext(PostsContext)
+  const { posts, setPosts } = useContext(PostsContext)
   const navigate = useNavigate()
   const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
 
@@ -64,20 +65,7 @@ export function CreatePost() {
 
           <label htmlFor='userId'>
             <FieldTitle>Author:</FieldTitle>
-            <select
-              required
-              id='userId'
-              name='userId'
-              type='select'
-              onChange={handleInputChange}
-            >
-              <option value=''>Select an user</option>
-              {users.map(({ id, name }) => (
-                <option key={id} value={id}>
-                  {name}
-                </option>
-              ))}
-            </select>
+            <UsersList handleInputChange={handleInputChange} />
           </label>
 
           <label htmlFor='body'>

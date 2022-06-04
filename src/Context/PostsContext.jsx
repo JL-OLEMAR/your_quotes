@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 
-import { getPosts, getUsers } from '../services'
+import { getPosts } from '../services'
 
 // Context
 export const PostsContext = createContext([])
@@ -16,17 +16,6 @@ export const PostsProvider = ({ children }) => {
   const [isLoadingPosts, setIsLoadingPosts] = useState(false)
 
   useEffect(() => {
-    if (users.length === 0) {
-      getUsers().then((user) => {
-        setUsers(user)
-        window.localStorage.setItem('users', JSON.stringify(user))
-      })
-    } else {
-      setUsers(users)
-    }
-  }, [users])
-
-  useEffect(() => {
     if (posts.length === 0) {
       setIsLoadingPosts(true)
 
@@ -39,11 +28,6 @@ export const PostsProvider = ({ children }) => {
       setPosts(posts)
     }
   }, [posts])
-
-  // Get a user where user.id === userId return { user }
-  const getUserById = (userId) => {
-    return users.find(({ id }) => id === Number(userId))
-  }
 
   // Get a post where post.id === postId return { post }
   const getPostById = (postId) => {
@@ -70,7 +54,6 @@ export const PostsProvider = ({ children }) => {
         isLoadingPosts,
         setUsers,
         setPosts,
-        getUserById,
         getPostById,
         getPostsFilterByUserId,
         getPostsFilterByPostId
