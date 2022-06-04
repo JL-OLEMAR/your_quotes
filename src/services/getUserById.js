@@ -6,9 +6,9 @@ const fromApiResponseToUserByID = (apiResponse) => {
   return { name }
 }
 
-export function getUserById(id) {
+export function getUserById({ userId }) {
   return window
-    .fetch(`${API_URL}/users/${id}`)
+    .fetch(`${API_URL}/users/${userId}`)
     .then((response) => response.json())
     .then(fromApiResponseToUserByID)
 }
