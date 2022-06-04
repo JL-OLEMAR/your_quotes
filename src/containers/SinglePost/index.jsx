@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { PostsContext } from '../../Context'
-import { DeleteModal, PostAuthor } from '../../components'
+import { DeleteModal, UserItem } from '../../components'
 import {
   ButtonsContainer,
   Container,
@@ -40,7 +40,7 @@ export function SinglePost() {
 
           <Post>
             <Title>{title}</Title>
-            <PostAuthor userId={userId} />
+            <UserItem userId={userId} />
             <p>{body}</p>
           </Post>
         </section>

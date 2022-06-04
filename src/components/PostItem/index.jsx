@@ -1,4 +1,4 @@
-import { PostAuthor } from '../PostAuthor'
+import { UserItem } from '../UserItem'
 
 import { Post, PostTitle } from './PostItem.styles.js'
 
@@ -9,7 +9,7 @@ export function PostItem({ body, id, title, userId }) {
         <h3>{title}</h3>
       </PostTitle>
       <p>{body}</p>
-      <PostAuthor userId={userId} />
+      <UserItem userId={userId} />
     </Post>
   )
 }

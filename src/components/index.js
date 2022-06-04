@@ -1,5 +1,5 @@
 export { DeleteModal } from './DeleteModal'
 export { Layout } from './Layout.jsx'
 export { Loading } from './Loading'
-export { PostAuthor } from './PostAuthor'
 export { PostsList } from './PostsList'
+export { UserItem } from './UserItem'
