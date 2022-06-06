@@ -1,3 +1,6 @@
 export { useForm } from './useForm.js'
+export { usePosts } from './usePosts.js'
+export { usePostsFilteredById } from './usePostsFilteredById.js'
+export { useSinglePost } from './useSinglePost.js'
 export { useSingleUser } from './useSingleUser.js'
 export { useUsers } from './useUsers.js'

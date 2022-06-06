@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { PostsContext } from '../../Context'
+import { useSinglePost } from '../../hooks'
 import { DeleteModal, UserItem } from '../../components'
 import {
   ButtonsContainer,
@@ -16,9 +16,7 @@ import { Post } from './SinglePost.styles.js'
 export function SinglePost() {
   const [modal, setModal] = useState(false)
   const { postId } = useParams()
-  const { setPosts, getPostById, getPostsFilterByPostId } =
-    useContext(PostsContext)
-  const { id, title, body, userId } = getPostById(postId)
+  const { post } = useSinglePost(postId)
 
   const handleDeletePost = async () => {
     setModal(!modal)
@@ -29,7 +27,7 @@ export function SinglePost() {
       <Container>
         <section>
           <ButtonsContainer>
-            <MainButton as={Link} to={`/edit/${id}`}>
+            <MainButton as={Link} to={`/edit/${post.id}`}>
               Edit Post ✍
             </MainButton>
 
@@ -39,20 +37,14 @@ export function SinglePost() {
           </ButtonsContainer>
 
           <Post>
-            <Title>{title}</Title>
-            <UserItem userId={userId} />
-            <p>{body}</p>
+            <Title>{post.title}</Title>
+            <UserItem userId={post.userId} />
+            <p>{post.body}</p>
           </Post>
         </section>
       </Container>
 
-      <DeleteModal
-        getPostsFilterByPostId={getPostsFilterByPostId}
-        modal={modal}
-        postId={id}
-        setModal={setModal}
-        setPosts={setPosts}
-      />
+      <DeleteModal modal={modal} postId={postId} setModal={setModal} />
     </main>
   )
 }

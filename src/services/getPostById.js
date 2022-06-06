@@ -6,9 +6,9 @@ const fromApiResponseToPostByID = (apiResponse) => {
   return { id, title, body, userId }
 }
 
-export function getPostById({ id }) {
+export function getPostById({ postId }) {
   return window
-    .fetch(`${API_URL}/posts/${id}`)
+    .fetch(`${API_URL}/posts/${postId}`)
     .then((response) => response.json())
     .then(fromApiResponseToPostByID)
 }

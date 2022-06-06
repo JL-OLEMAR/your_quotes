@@ -1,10 +1,12 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useContext } from 'react'
 
 import { updatePost } from '../services'
-import { PostsContext } from '../Context'
-import { useForm } from '../hooks'
-import { setErrorToast, setSuccessToast } from '../utils'
+import {
+  useForm,
+  usePosts,
+  usePostsFilteredById,
+  useSinglePost
+} from '../hooks'
 import {
   Button,
   CancelButton,
@@ -13,12 +15,13 @@ import {
   Form,
   Title
 } from '../shared'
+import { setErrorToast, setSuccessToast } from '../utils'
 
 export function EditPost() {
+  const { setPosts } = usePosts()
   const { postId } = useParams()
-  const { setPosts, getPostById, getPostsFilterByPostId } =
-    useContext(PostsContext)
-  const post = getPostById(postId)
+  const { post } = useSinglePost(postId)
+  const { postsFiltered } = usePostsFilteredById(postId)
   const navigate = useNavigate()
 
   const [{ title, body }, handleInputChange] = useForm({
@@ -38,7 +41,6 @@ export function EditPost() {
           title,
           body
         })
-        const postsFiltered = getPostsFilterByPostId(post.id)
         const restPosts = [editedPost, ...postsFiltered]
 
         setPosts(restPosts)

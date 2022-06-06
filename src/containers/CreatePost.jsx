@@ -1,9 +1,7 @@
-import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { addPost } from '../services'
-import { PostsContext } from '../Context'
-import { useForm } from '../hooks'
+import { useForm, usePosts } from '../hooks'
 import { UsersList } from '../components'
 import {
   Button,
@@ -23,7 +21,7 @@ const INITIAL_STATE = {
 
 export function CreatePost() {
   const [{ title, body, userId }, handleInputChange] = useForm(INITIAL_STATE)
-  const { posts, setPosts } = useContext(PostsContext)
+  const { posts, setPosts } = usePosts()
   const navigate = useNavigate()
   const canSubmit = [title, body, userId].every(Boolean) // if trusty, ok
 

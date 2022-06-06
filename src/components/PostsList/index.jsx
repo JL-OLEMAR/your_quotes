@@ -4,8 +4,8 @@ import { Title } from '../../shared'
 
 import { Posts } from './PostsList.styles.js'
 
-export function PostsList({ userPosts, isLoadingPosts }) {
-  if (isLoadingPosts) return <Loading />
+export function PostsList({ userPosts, isLoading }) {
+  if (isLoading) return <Loading />
 
   return (
     <Posts>

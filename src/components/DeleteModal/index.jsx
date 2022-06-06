@@ -1,24 +1,21 @@
 import { useNavigate } from 'react-router-dom'
 
 import { deletePost } from '../../services'
+import { usePosts, usePostsFilteredById } from '../../hooks'
 import { DeleteButton, CancelButton } from '../../shared'
 import { setErrorToast, setSuccessToast } from '../../utils'
 
 import { ModalContainer, Modal } from './DeleteModal.styles.js'
 
-export function DeleteModal({
-  getPostsFilterByPostId,
-  modal,
-  postId,
-  setModal,
-  setPosts
-}) {
+export function DeleteModal({ modal, postId, setModal }) {
+  const { setPosts } = usePosts()
+  const { postsFiltered } = usePostsFilteredById(postId)
   const navigate = useNavigate()
 
   const handleConfirmDelete = async () => {
     try {
       await deletePost(postId)
-      const [...restPosts] = getPostsFilterByPostId(postId)
+      const restPosts = [...postsFiltered]
 
       setPosts(restPosts)
       window.localStorage.setItem('posts', JSON.stringify(restPosts))
@@ -26,7 +23,6 @@ export function DeleteModal({
       navigate('/')
     } catch (error) {
       setErrorToast('Failed to delete the post')
-      console.error('Failed to delete the post: ', error)
     }
   }
 

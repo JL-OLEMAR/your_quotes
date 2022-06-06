@@ -1,14 +1,18 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { PostsContext } from '../Context'
-import { useForm } from '../hooks'
+import { useForm, usePosts } from '../hooks'
 import { PostsList, UsersList } from '../components'
 import { ButtonsContainer, Container, MainButton, Form } from '../shared'
 
 export function Home() {
   const [{ userId }, handleInputChange] = useForm({ userId: '' })
-  const { isLoadingPosts, getPostsFilterByUserId } = useContext(PostsContext)
+  const { posts, isLoading } = usePosts()
+
+  const getPostsFilterByUserId = () => {
+    const postsFiltered = posts.filter((post) => post.userId === Number(userId))
+
+    return postsFiltered.length > 0 ? postsFiltered : posts
+  }
 
   return (
     <Container>
@@ -23,10 +27,7 @@ export function Home() {
         </Form>
       </ButtonsContainer>
 
-      <PostsList
-        isLoadingPosts={isLoadingPosts}
-        userPosts={getPostsFilterByUserId(userId)}
-      />
+      <PostsList isLoading={isLoading} userPosts={getPostsFilterByUserId()} />
     </Container>
   )
 }
