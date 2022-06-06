@@ -3,14 +3,11 @@ import { useSingleUser } from '../../hooks'
 import { Author } from './UserItem.styles.js'
 
 export function UserItem({ userId }) {
-  const { user } = useSingleUser({ userId })
-  const name = user ? user.name : 'Anonymous'
-
-  if (!user) return null
+  const { user } = useSingleUser(userId)
 
   return (
     <Author>
-      <i>By: {name}</i>
+      <i>By: {user ? user.name : 'Anonymous'}</i>
     </Author>
   )
 }

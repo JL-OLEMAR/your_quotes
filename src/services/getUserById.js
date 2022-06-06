@@ -1,9 +1,9 @@
 import { API_URL } from './settings.js'
 
 const fromApiResponseToUserByID = (apiResponse) => {
-  const { name } = apiResponse
+  const { id, name } = apiResponse
 
-  return { name }
+  return { id, name }
 }
 
 export function getUserById({ userId }) {
