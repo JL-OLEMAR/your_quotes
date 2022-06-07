@@ -1,12 +1,6 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-import { updatePost } from '../services'
-import {
-  useForm,
-  usePosts,
-  usePostsFilteredById,
-  useSinglePost
-} from '../hooks'
+import { useEditPost, useForm, useSinglePost } from '../hooks'
 import {
   Button,
   CancelButton,
@@ -15,44 +9,16 @@ import {
   Form,
   Title
 } from '../shared'
-import { setErrorToast, setSuccessToast } from '../utils'
 
 export function EditPost() {
-  const { setPosts } = usePosts()
   const { postId } = useParams()
   const { post } = useSinglePost(postId)
-  const { postsFiltered } = usePostsFilteredById(postId)
-  const navigate = useNavigate()
-
   const [{ title, body }, handleInputChange] = useForm({
     title: post.title,
     body: post.body
   })
 
-  const canSubmit = [title, body].every(Boolean) // if trusty, ok to submit
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    if (canSubmit) {
-      try {
-        const editedPost = await updatePost(postId, {
-          ...post,
-          title,
-          body
-        })
-        const restPosts = [editedPost, ...postsFiltered]
-
-        setPosts(restPosts)
-        window.localStorage.setItem('posts', JSON.stringify(restPosts))
-        setSuccessToast('Post updated successfully')
-        navigate(`/posts/${postId}`)
-      } catch (err) {
-        setErrorToast('Failed to edit the post')
-        console.error('Failed to edit the post: ', err)
-      }
-    }
-  }
+  const { canSubmit, handleSubmit } = useEditPost({ post, title, body })
 
   return (
     <main>
@@ -84,7 +50,7 @@ export function EditPost() {
           </label>
 
           <div>
-            <CancelButton as={Link} to={`/posts/${postId}`} type='button'>
+            <CancelButton as={Link} to={`/posts/${post.id}`} type='button'>
               Cancel 🚫
             </CancelButton>
             <Button disabled={!canSubmit} type='submit'>
