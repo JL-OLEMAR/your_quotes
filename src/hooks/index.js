@@ -1,4 +1,5 @@
 export { useCreatePost } from './useCreatePost.js'
+export { useDeletePost } from './useDeletePost.js'
 export { useEditPost } from './useEditPost.js'
 export { useForm } from './useForm.js'
 export { usePosts } from './usePosts.js'
