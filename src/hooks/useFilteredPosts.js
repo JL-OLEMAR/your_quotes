@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 export function useFilteredPosts({ posts }) {
   const [userId, setUserId] = useState('')
@@ -9,12 +9,12 @@ export function useFilteredPosts({ posts }) {
     setUserId(target.value)
   }
 
-  const getPostsById = (userId) => {
-    return posts.filter((post) => post.userId === Number(userId))
-  }
-
-  const plusPages = currentPage + 8
-  const lessPages = currentPage - 8
+  const getPostsById = useCallback(
+    (userId) => {
+      return posts.filter((post) => post.userId === Number(userId))
+    },
+    [posts]
+  )
 
   const getFilteredPosts = () => {
     if (userId === '') return posts.slice(currentPage, plusPages)
@@ -22,6 +22,17 @@ export function useFilteredPosts({ posts }) {
     return getPostsById(userId).slice(currentPage, plusPages)
   }
 
+  const lessPages = currentPage - 8
+  const plusPages = currentPage + 8
+
+  // Previous page
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(lessPages)
+    }
+  }
+
+  // Next page
   const nextPage = () => {
     if (userId !== '' && getPostsById(userId).length > plusPages) {
       setCurrentPage(plusPages)
@@ -34,11 +45,29 @@ export function useFilteredPosts({ posts }) {
     }
   }
 
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(lessPages)
-    }
+  // Button disable if there are no more previous pages
+  const disabledPrevButton = () => {
+    if (userId === '') return currentPage === 0
+
+    return currentPage === 0
   }
 
-  return { handleInputChange, prevPage, nextPage, getFilteredPosts }
+  // Button disable if there are no more next pages
+  const disabledNextButton = () => {
+    if (userId !== '' && getPostsById(userId).length <= plusPages) return true
+    if (userId === '') {
+      if (posts.length <= plusPages) return true
+    }
+
+    return false
+  }
+
+  return {
+    handleInputChange,
+    getFilteredPosts,
+    prevPage,
+    nextPage,
+    disabledPrevButton,
+    disabledNextButton
+  }
 }
